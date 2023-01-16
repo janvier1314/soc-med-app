@@ -50,6 +50,7 @@ export default function Login() {
             <Input
               type="email"
               placeholder="user@email.com"
+              focusBorderColor="orange.500"
               {...register("email", emailValidate)}
             />
             <FormErrorMessage>
@@ -60,6 +61,7 @@ export default function Login() {
               <Input
                 type="password"
                 placeholder="password"
+                focusBorderColor="orange.500"
                 {...register("password", passwordValidate)}
               />
               <FormErrorMessage>
