@@ -9,6 +9,7 @@ import { DASHBOARD, LOGIN } from "lib/routes";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { setDoc, doc } from "firebase/firestore";
+import isUsernameExists from "utils/isUsernameExists";
 
 export function useAuth() {
   const [authUser, isLoading, error] = useAuthState(auth);
@@ -57,6 +58,7 @@ export function useLogin() {
 export function useRegister() {
   const [isLoading, setLoading] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
 
   async function register({
     username,
@@ -86,16 +88,37 @@ export function useRegister() {
           avatar: "",
           date: Date.now(),
         });
-      } catch (error) {}
+
+        toast({
+          title: "Account created successfully",
+          description: "You are logged in",
+          status: "success",
+          isClosable: true,
+          position: "top",
+          duration: 5000,
+        });
+
+        navigate(redirectTo);
+      } catch (error) {
+        toast({
+          title: "Account creation failed",
+          description: error.message,
+          status: "error",
+          isClosable: true,
+          position: "top",
+          duration: 5000,
+        });
+      } finally {
+        setLoading(false);
+      }
     }
-    setLoading(false);
   }
 
   return { register, isLoading };
 }
 
 export function useLogout() {
-  const [signOut, isLoading, error] = useSignOut(auth);
+  const [signOut, isLoading] = useSignOut(auth);
   const toast = useToast();
   const navigate = useNavigate();
 

@@ -21,20 +21,15 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
-
   async function handleLogin(data) {
-    const succeeded = await login({
+    login({
       email: data.email,
       password: data.password,
       redirectTo: DASHBOARD, // this can be done straight here instead of in the hook
     });
-
-    if (succeeded) reset();
   }
 
   return (
