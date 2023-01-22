@@ -1,12 +1,12 @@
 import {
   Box,
-  Center,
-  Heading,
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
   Button,
+  Center,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
   Link,
   Text,
 } from "@chakra-ui/react";
@@ -33,7 +33,7 @@ export default function Register() {
       username: data.username,
       email: data.email,
       password: data.password,
-      redirectTo: DASHBOARD, // this can be done straight here instead of in the hook
+      redirectTo: DASHBOARD,
     });
   }
 
@@ -62,7 +62,7 @@ export default function Register() {
               type="email"
               placeholder="user@email.com"
               focusBorderColor="orange.500"
-              {...register("username", emailValidate)}
+              {...register("email", emailValidate)}
             />
             <FormErrorMessage>
               {errors.email && errors.email.message}

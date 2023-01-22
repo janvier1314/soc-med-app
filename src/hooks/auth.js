@@ -4,17 +4,34 @@ import {
 } from "firebase/auth";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { auth, db } from "lib/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DASHBOARD, LOGIN } from "lib/routes";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import isUsernameExists from "utils/isUsernameExists";
 
 export function useAuth() {
-  const [authUser, isLoading, error] = useAuthState(auth);
+  const [authUser, authLoading, error] = useAuthState(auth);
+  const [isLoading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
-  return { user: authUser, isLoading, error };
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const ref = doc(db, "users", authUser.uid);
+      const docSnap = await getDoc(ref);
+      setUser(docSnap.data());
+      setLoading(false);
+    }
+
+    if (!authLoading) {
+      if (authUser) fetchData();
+      else setLoading(false); // Not signed in
+    }
+  }, [authLoading]);
+
+  return { user, isLoading, error };
 }
 
 export function useLogin() {
@@ -22,7 +39,6 @@ export function useLogin() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  // redirectTo is optional and defaults to DASHBOARD
   async function login({ email, password, redirectTo = DASHBOARD }) {
     setLoading(true);
 
@@ -46,10 +62,9 @@ export function useLogin() {
         duration: 5000,
       });
       setLoading(false);
-      return false; // Return false if login failed
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-    return true; // Return true if login succeeded
   }
 
   return { login, isLoading };
@@ -67,6 +82,7 @@ export function useRegister() {
     redirectTo = DASHBOARD,
   }) {
     setLoading(true);
+
     const usernameExists = await isUsernameExists(username);
 
     if (usernameExists) {
@@ -90,7 +106,7 @@ export function useRegister() {
         });
 
         toast({
-          title: "Account created successfully",
+          title: "Account created",
           description: "You are logged in",
           status: "success",
           isClosable: true,
@@ -101,7 +117,7 @@ export function useRegister() {
         navigate(redirectTo);
       } catch (error) {
         toast({
-          title: "Account creation failed",
+          title: "Signing Up failed",
           description: error.message,
           status: "error",
           isClosable: true,
@@ -118,7 +134,7 @@ export function useRegister() {
 }
 
 export function useLogout() {
-  const [signOut, isLoading] = useSignOut(auth);
+  const [signOut, isLoading, error] = useSignOut(auth);
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -132,8 +148,7 @@ export function useLogout() {
         duration: 5000,
       });
       navigate(LOGIN);
-      // can have an else here if needed for error handling because signOut() returns a false if failed
-    }
+    } // else: show error [signOut() returns false if failed]
   }
 
   return { logout, isLoading };
