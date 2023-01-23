@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "hooks/auth";
 import Navbar from "components/layout/Navbar";
 import Sidebar from "./Sidebar";
+import { Box, Flex } from "@chakra-ui/react";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -14,15 +15,19 @@ export default function Layout() {
     if (!isLoading && pathname.startsWith("/protected") && !user) {
       navigate(LOGIN);
     }
-  }, [pathname, user, isLoading]);
+  }, [pathname, user, isLoading, navigate]);
 
   if (isLoading) return "Loading...";
 
   return (
     <>
       <Navbar />
-      <Sidebar />
-      <Outlet />
+      <Flex pt="16" pb="12" mx="auto" w="full" maxW="1200px">
+        <Box w="900px">
+          <Outlet />
+        </Box>
+        <Sidebar />
+      </Flex>
     </>
   );
 }
