@@ -29,7 +29,7 @@ export function useAuth() {
       if (authUser) fetchData();
       else setLoading(false); // Not signed in
     }
-  }, [authLoading]);
+  }, [authLoading, authUser]);
 
   return { user, isLoading, error };
 }

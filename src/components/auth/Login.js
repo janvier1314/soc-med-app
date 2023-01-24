@@ -45,7 +45,7 @@ export default function Login() {
             <Input
               type="email"
               placeholder="user@email.com"
-              focusBorderColor="orange.500"
+              focusBorderColor="blackAlpha.500"
               {...register("email", emailValidate)}
             />
             <FormErrorMessage>
@@ -56,7 +56,7 @@ export default function Login() {
               <Input
                 type="password"
                 placeholder="password"
-                focusBorderColor="orange.500"
+                focusBorderColor="blackAlpha.500"
                 {...register("password", passwordValidate)}
               />
               <FormErrorMessage>
@@ -67,7 +67,7 @@ export default function Login() {
           <Button
             mt="4"
             type="submit"
-            colorScheme="orange"
+            colorScheme="blackAlpha"
             size="md"
             w="full"
             isLoading={isLoading}
@@ -80,10 +80,10 @@ export default function Login() {
           Don't have an account?{" "}
           <Link
             to={REGISTER}
-            color="orange.500"
+            color="blackAlpha.500"
             fontWeight="medium"
             textDecor="underline"
-            _hover={{ background: "orange.100" }}
+            _hover={{ background: "blackAlpha.100" }}
             as={RouterLink}
           >
             Register

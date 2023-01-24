@@ -14,7 +14,7 @@ function ActiveUser() {
       <Avatar user={user} />
       <Code>@{user.username}</Code>
       <Button
-        colorScheme="orange"
+        colorScheme="blackAlpha"
         w="full"
         as={Link}
         to={`${PROTECTED}/profile/${user.id}`}
@@ -33,17 +33,17 @@ export default function Sidebar() {
       w="100%"
       maxW="300px"
       borderLeft="1px solid"
-      borderLeftColor="orange.100"
+      borderLeftColor="blackAlpha.100"
       position="sticky"
       top="16"
       display={{ base: "none", md: "block" }}
     >
       <ActiveUser />
       <Box align="center">
-        <Box as="ul" borderBottom="2px solid" borderColor="orange.200" />
+        <Box as="ul" borderBottom="2px solid" borderColor="blackAlpha.200" />
         <Button
           variant="outline"
-          colorScheme="orange"
+          colorScheme="blackAlpha"
           as={Link}
           to={USERS}
           mt="4"

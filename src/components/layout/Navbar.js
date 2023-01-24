@@ -11,18 +11,23 @@ export default function Navbar() {
       pos="fixed"
       width="full"
       borderTop="6px solid"
-      borderTopColor="orange.400"
+      borderTopColor="blackAlpha.400"
       height="16"
       zIndex="3"
       justify="center"
     >
       <Flex px="4" w="full" align="center" maxW="1200px">
-        <Link color="orange" as={RouterLink} to={DASHBOARD} fontWeight="bold">
+        <Link
+          color="blackAlpha"
+          as={RouterLink}
+          to={DASHBOARD}
+          fontWeight="bold"
+        >
           Home
         </Link>
         <Button
           ml="auto"
-          colorScheme="orange"
+          colorScheme="blackAlpha"
           size="sm"
           onClick={logout}
           isLoading={isLoading}

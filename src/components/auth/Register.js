@@ -49,7 +49,7 @@ export default function Register() {
             <FormLabel>Username</FormLabel>
             <Input
               placeholder="username"
-              focusBorderColor="orange.500"
+              focusBorderColor="blackAlpha.500"
               {...register("username", usernameValidate)}
             />
             <FormErrorMessage>
@@ -61,7 +61,7 @@ export default function Register() {
             <Input
               type="email"
               placeholder="user@email.com"
-              focusBorderColor="orange.500"
+              focusBorderColor="blackAlpha.500"
               {...register("email", emailValidate)}
             />
             <FormErrorMessage>
@@ -73,7 +73,7 @@ export default function Register() {
             <Input
               type="password"
               placeholder="password"
-              focusBorderColor="orange.500"
+              focusBorderColor="blackAlpha.500"
               {...register("password", passwordValidate)}
             />
             <FormErrorMessage>
@@ -83,7 +83,7 @@ export default function Register() {
           <Button
             mt="4"
             type="submit"
-            colorScheme="orange"
+            colorScheme="blackAlpha"
             size="md"
             w="full"
             isLoading={isLoading}
@@ -97,10 +97,10 @@ export default function Register() {
           <Link
             as={RouterLink}
             to={LOGIN}
-            color="orange.500"
+            color="blackAlpha.500"
             fontWeight="medium"
             textDecor="underline"
-            _hover={{ background: "orange.100" }}
+            _hover={{ background: "blackAlpha.100" }}
           >
             Log In
           </Link>{" "}
