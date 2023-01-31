@@ -4,6 +4,7 @@ import Login from "components/auth/Login";
 import Register from "components/auth/Register";
 import Layout from "components/layout";
 import Dashboard from "components/auth/dashboard";
+import Comments from "components/comments";
 
 export const ROOT = "/";
 export const LOGIN = "/login";
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: COMMENTS,
-        element: "All comments for a specific post id",
+        element: <Comments />,
       },
     ],
   },
