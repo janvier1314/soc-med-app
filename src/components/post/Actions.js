@@ -47,7 +47,7 @@ export default function Actions({ post }) {
         <IconButton
           as={Link}
           to={`${PROTECTED}/comments/${id}`}
-          // isLoading={likeLoading || userLoading}
+          isLoading={commentsLoading}
           size="md"
           colorScheme="blackAlpha"
           variant="ghost"
